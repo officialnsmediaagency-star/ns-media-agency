@@ -1,3 +1,36 @@
+// ================================
+// FIREBASE FIRESTORE CONNECTION
+// ================================
+
+import { initializeApp } from "firebase/app";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp
+} from "firebase/firestore";
+
+
+// Your Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyBR_J0JISRnMcNmH9cpQUaE3OU43qsthgc",
+    authDomain: "ns-media-agency.firebaseapp.com",
+    projectId: "ns-media-agency",
+    storageBucket: "ns-media-agency.firebasestorage.app",
+    messagingSenderId: "332535957542",
+    appId: "1:332535957542:web:66c6c53a40636143acfee7",
+    measurementId: "G-8FVFSFS9ZX"
+};
+
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+
+// Connect to Firestore
+const db = getFirestore(app);
+
 /* ==========================================
    NS MEDIA AGENCY
    Premium Website JavaScript
@@ -331,3 +364,48 @@ nav a.active::after{
 width:100%;
 
 }
+
+// =========================================
+// SAVE CONTACT FORM DATA TO FIRESTORE
+// =========================================
+
+const form = document.getElementById("contactForm");
+
+form.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    try {
+
+        await addDoc(
+            collection(db, "creatorApplications"),
+            {
+                name: document.getElementById("name").value,
+
+                email: document.getElementById("email").value,
+
+                phone: document.getElementById("phone").value,
+
+                companyOrCreatorName:
+                    document.getElementById("company").value,
+
+                projectDetails:
+                    document.getElementById("message").value,
+
+                createdAt: serverTimestamp()
+            }
+        );
+
+        alert("Your information has been submitted successfully!");
+
+        form.reset();
+
+    } catch (error) {
+
+        console.error("Error saving data:", error);
+
+        alert("Something went wrong. Please try again.");
+
+    }
+
+});
