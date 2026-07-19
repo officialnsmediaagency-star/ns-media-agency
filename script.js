@@ -1,20 +1,21 @@
-// ================================
+// =========================================
 // FIREBASE FIRESTORE CONNECTION
-// ================================
+// =========================================
 
-import { initializeApp } from "firebase/app";
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
     getFirestore,
     collection,
     addDoc,
     serverTimestamp
-} from "firebase/firestore";
+} from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-// Your Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBR_J0JISRnMcNmH9cpQUaE3OU43qsthgc",
+    apiKey: "AIzaSyBR_J0JISRfNmH9cpQUaE3OU43qsthgc",
     authDomain: "ns-media-agency.firebaseapp.com",
     projectId: "ns-media-agency",
     storageBucket: "ns-media-agency.firebasestorage.app",
@@ -24,11 +25,7 @@ const firebaseConfig = {
 };
 
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-
-// Connect to Firestore
 const db = getFirestore(app);
 
 /* ==========================================
@@ -365,10 +362,6 @@ width:100%;
 
 }
 
-// =========================================
-// SAVE CONTACT FORM DATA TO FIRESTORE
-// =========================================
-
 const form = document.getElementById("contactForm");
 
 form.addEventListener("submit", async (e) => {
@@ -377,24 +370,18 @@ form.addEventListener("submit", async (e) => {
 
     try {
 
-        await addDoc(
-            collection(db, "creatorApplications"),
-            {
-                name: document.getElementById("name").value,
+        await addDoc(collection(db, "creatorApplications"), {
 
-                email: document.getElementById("email").value,
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            phone: document.getElementById("phone").value,
+            companyOrCreatorName:
+                document.getElementById("company").value,
+            projectDetails:
+                document.getElementById("message").value,
+            createdAt: serverTimestamp()
 
-                phone: document.getElementById("phone").value,
-
-                companyOrCreatorName:
-                    document.getElementById("company").value,
-
-                projectDetails:
-                    document.getElementById("message").value,
-
-                createdAt: serverTimestamp()
-            }
-        );
+        });
 
         alert("Your information has been submitted successfully!");
 
@@ -402,9 +389,9 @@ form.addEventListener("submit", async (e) => {
 
     } catch (error) {
 
-        console.error("Error saving data:", error);
+        console.error("Firestore Error:", error);
 
-        alert("Something went wrong. Please try again.");
+        alert("Error: " + error.message);
 
     }
 
