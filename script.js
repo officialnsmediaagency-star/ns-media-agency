@@ -318,48 +318,51 @@ button.style.transform="translateY(0px)";
 
 console.log("✅ NS Media Agency Website Loaded Successfully");
 
-// ================================
-// FIREBASE CONTACT FORM
-// ================================
-
 const contactForm = document.getElementById("contactForm");
 
 if (contactForm) {
     contactForm.addEventListener("submit", async function (event) {
 
-        // STOP PAGE REFRESH
         event.preventDefault();
 
-        // Get form values
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const phone = document.getElementById("phone").value;
-        const company = document.getElementById("company").value;
-        const message = document.getElementById("message").value;
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const company = document.getElementById("company").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        console.log({
+            name,
+            email,
+            phone,
+            company,
+            message
+        });
 
         try {
 
-            // Save data to Firebase
             await addDoc(collection(db, "creatorApplications"), {
+
                 name: name,
                 email: email,
                 phone: phone,
                 companyOrCreatorName: company,
                 projectDetails: message,
-                createdAt: new Date()
+                createdAt: serverTimestamp()
+
             });
 
-            alert("Your application has been submitted successfully!");
+            alert("✅ Thank you! Your message has been received. We'll contact you soon.");
 
-            // Clear the form
             contactForm.reset();
 
         } catch (error) {
 
-            console.error("Error submitting application:", error);
+            console.error("Firestore Error:", error);
 
-            alert("Something went wrong. Please try again.");
+            alert("Error: " + error.message);
 
         }
+
     });
 }
