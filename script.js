@@ -318,49 +318,6 @@ button.style.transform="translateY(0px)";
 
 console.log("✅ NS Media Agency Website Loaded Successfully");
 
-/* ===================================
-        SCROLL REVEAL
-=================================== */
-
-.about,
-.stats,
-.services,
-.creators,
-.brands,
-.testimonials,
-.cta,
-.faq,
-.contact{
-
-opacity:0;
-
-transform:translateY(60px);
-
-transition:all .8s ease;
-
-}
-
-.show{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-/* Active Navigation */
-
-nav a.active{
-
-color:#FFD700;
-
-}
-
-nav a.active::after{
-
-width:100%;
-
-}
 
 const form = document.getElementById("contactForm");
 
