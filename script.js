@@ -318,42 +318,6 @@ button.style.transform="translateY(0px)";
 
 console.log("✅ NS Media Agency Website Loaded Successfully");
 
-
-const form = document.getElementById("contactForm");
-
-form.addEventListener("submit", async (e) => {
-    
-    e.preventDefault();
-
-    try {
-
-        await addDoc(collection(db, "creatorApplications"), {
-
-            name: document.getElementById("name").value,
-            email: document.getElementById("email").value,
-            phone: document.getElementById("phone").value,
-            companyOrCreatorName:
-                document.getElementById("company").value,
-            projectDetails:
-                document.getElementById("message").value,
-            createdAt: serverTimestamp()
-
-        });
-
-        alert("Your information has been submitted successfully!");
-
-        form.reset();
-
-    } catch (error) {
-
-        console.error("Firestore Error:", error);
-
-        alert("Error: " + error.message);
-
-    }
-
-});
-
 // ================================
 // FIREBASE CONTACT FORM
 // ================================
