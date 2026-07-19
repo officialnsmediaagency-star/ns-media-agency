@@ -322,7 +322,7 @@ console.log("✅ NS Media Agency Website Loaded Successfully");
 const form = document.getElementById("contactForm");
 
 form.addEventListener("submit", async (e) => {
-
+    
     e.preventDefault();
 
     try {
