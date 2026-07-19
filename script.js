@@ -396,3 +396,49 @@ form.addEventListener("submit", async (e) => {
     }
 
 });
+
+// ================================
+// FIREBASE CONTACT FORM
+// ================================
+
+const contactForm = document.getElementById("contactForm");
+
+if (contactForm) {
+    contactForm.addEventListener("submit", async function (event) {
+
+        // STOP PAGE REFRESH
+        event.preventDefault();
+
+        // Get form values
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const company = document.getElementById("company").value;
+        const message = document.getElementById("message").value;
+
+        try {
+
+            // Save data to Firebase
+            await addDoc(collection(db, "creatorApplications"), {
+                name: name,
+                email: email,
+                phone: phone,
+                companyOrCreatorName: company,
+                projectDetails: message,
+                createdAt: new Date()
+            });
+
+            alert("Your application has been submitted successfully!");
+
+            // Clear the form
+            contactForm.reset();
+
+        } catch (error) {
+
+            console.error("Error submitting application:", error);
+
+            alert("Something went wrong. Please try again.");
+
+        }
+    });
+}
