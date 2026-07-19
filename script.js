@@ -325,11 +325,11 @@ if (contactForm) {
 
         event.preventDefault();
 
-      const name = document.getElementById("contactName").value.trim();
-      const email = document.getElementById("contactEmail").value.trim();
-      const phone = document.getElementById("contactPhone").value.trim();
-      const company = document.getElementById("contactCompany").value.trim();
-      const message = document.getElementById("contactMessage").value.trim();
+        const name = document.getElementById("contactName").value.trim();
+        const email = document.getElementById("contactEmail").value.trim();
+        const phone = document.getElementById("contactPhone").value.trim();
+        const company = document.getElementById("contactCompany").value.trim();
+        const message = document.getElementById("contactMessage").value.trim();
         console.log({
             name,
             email,
